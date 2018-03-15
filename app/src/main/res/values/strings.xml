@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Educational app</string>
+    <string name="introduction">Answer the following questions and hit submit to know your score.</string>
+    <string name="question_1">1) The shape of a DNA molecule is:</string>
+    <string name="question_1_option_1">Linear</string>
+    <string name="question_1_option_2">Circular</string>
+    <string name="question_1_option_3">Helix</string>
+    <string name="question_1_option_4">Double helix</string>
+    <string name="question_1_option_5">hexagonal</string>
+    <string name="question_2">2) The DNA contains which of the following nitrogenous bases?</string>
+    <string name="question_2_option_1">Adenine</string>
+    <string name="question_2_option_2">Thymine</string>
+    <string name="question_2_option_3">Guanine</string>
+    <string name="question_2_option_4">Cytosine</string>
+    <string name="question_2_option_5">Uracil</string>
+    <string name="question_3">3) What is the name of the technique used in molecular biology to amplify DNA in a sample?</string>
+    <string name="input_the_answer">Answer</string>
+    <string name="question_4">4) The information for protein synthesis is stored in </string>
+    <string name="question_5">5) Which of the followings are the components of a nucleotide? </string>
+    <string name="question_5_option_1">Phosphate group</string>
+    <string name="question_5_option_2">Sugar</string>
+    <string name="question_5_option_3">Nitrogenous base</string>
+    <string name="question_5_option_4">Sulphur group</string>
+    <string name="question_5_option_5">Amino acid</string>
+    <string name="question_6">6) In a cell, transcription takes place in</string>
+    <string name="question_6_option_1">ribosomes</string>
+    <string name="question_6_option_2">nucleus</string>
+    <string name="question_6_option_3">mitochondria</string>
+    <string name="question_6_option_4">golgi body</string>
+    <string name="question_6_option_5">cytoplasm</string>
+    <string name="submit">Submit</string>
+    <string name="Attempt_again">Attempt again</string>
+</resources>
