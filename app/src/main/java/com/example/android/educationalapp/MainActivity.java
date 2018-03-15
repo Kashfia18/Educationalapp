@@ -19,7 +19,7 @@ import android.widget.Toast;
  * This app calculates and shows the results of a quiz.
  */
 
-public class MainActivity extends AppCompatActivity implements ActionListener{
+public class MainActivity extends AppCompatActivity{
 
 
     //Declaring variables
