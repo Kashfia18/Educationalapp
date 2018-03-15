@@ -40,7 +40,6 @@
                 android:id="@+id/question_1_option_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="@string/question_1_option_1"
                 android:layout_marginLeft="@dimen/options_layout_marginLeft"
                 android:textAppearance="@style/CodeForOptions"/>
@@ -49,7 +48,6 @@
                 android:id="@+id/question_1_option_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="@string/question_1_option_2"
                 android:layout_marginLeft="@dimen/options_layout_marginLeft"
                 android:textAppearance="@style/CodeForOptions"/>
@@ -58,7 +56,6 @@
                 android:id="@+id/question_1_option_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="@string/question_1_option_3"
                 android:layout_marginLeft="@dimen/options_layout_marginLeft"
                 android:textAppearance="@style/CodeForOptions"/>
@@ -67,7 +64,6 @@
                 android:id="@+id/question_1_option_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="@string/question_1_option_4"
                 android:layout_marginLeft="@dimen/options_layout_marginLeft"
                 android:textAppearance="@style/CodeForOptions"/>
@@ -76,7 +72,6 @@
                 android:id="@+id/question_1_option_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="@string/question_1_option_5"
                 android:layout_marginLeft="@dimen/options_layout_marginLeft"
                 android:layout_marginBottom="@dimen/options_layout_marginBottom"
@@ -157,7 +152,8 @@
             android:layout_marginLeft="@dimen/question_layout_marginLeft"
             android:layout_marginRight="@dimen/question_layout_marginRight"
             android:layout_marginBottom="@dimen/question_layout_marginBottom"
-            android:textAppearance="@style/CodeForOptions"/>
+            android:textAppearance="@style/CodeForOptions"
+            android:maxLength="@integer/quantity_length"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -177,7 +173,8 @@
             android:layout_marginBottom="@dimen/question_layout_marginBottom"
             android:gravity="left"
             android:hint="@string/input_the_answer"
-            android:textAppearance="@style/CodeForOptions"/>
+            android:textAppearance="@style/CodeForOptions"
+            android:maxLength="@integer/quantity_length"/>
 
         <TextView
             android:layout_width="wrap_content"

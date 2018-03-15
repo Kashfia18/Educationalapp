@@ -21,8 +21,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity{
 
-
-    //Declaring variables
+    //Declaring global variables
 
     RadioGroup question_1;
 
@@ -44,15 +43,15 @@ public class MainActivity extends AppCompatActivity{
 
     RadioGroup question_6;
 
-    Button submit;
-
+    //Declares and initializes the number of clicks of submit button to zero.
     int click = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //finds the view with the given id and stores it in the declared variables.
+        //initialize the views
 
         question_1 =findViewById(R.id.question_1);
 
@@ -162,18 +161,33 @@ public class MainActivity extends AppCompatActivity{
             score = score + 1;
         }
 
-        if (score >= 0) {
+        //Every time submit button is clicked it adds 1 to click varaiable
+        click=click+1;
+
+        //Displays the final results in toast message
+        if (click == 1) {
             //Show the score message as a Toast
             Toast.makeText(MainActivity.this,
                     "Your score is " + score + " out of 6", Toast.LENGTH_LONG).show();
             }
+        else{
+            //Show the score message as a Toast
+            Toast.makeText(MainActivity.this,
+                    "Click 'ATTEMPT AGAIN' to start the quiz again",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
-    /**
+
+        /**
      * This method is called when the attempt_again button is clicked. It resets everything.
      */
     public void attempt_again(View view){
 
+        //resets the number of clicks of submit button to zero.
+        click =0;
+
+        //resets the radio buttons, check boxes and editText fields.
         question_1.clearCheck();
 
         question_2_option_1.setChecked(false);
