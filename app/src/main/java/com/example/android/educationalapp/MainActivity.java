@@ -22,8 +22,9 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity{
 
     //Declaring global variables
-
     RadioGroup question_1;
+    RadioButton question_1_option_3;
+    RadioButton question_1_option_4;
 
     CheckBox question_2_option_1;
     CheckBox question_2_option_2;
@@ -32,8 +33,10 @@ public class MainActivity extends AppCompatActivity{
     CheckBox question_2_option_5;
 
     EditText myEditText_3;
+    TextView question_3;
 
     EditText myEditText_4;
+    TextView question_4;
 
     CheckBox question_5_option_1;
     CheckBox question_5_option_2;
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity{
     CheckBox question_5_option_5;
 
     RadioGroup question_6;
+    RadioButton question_6_option_2;
+    RadioButton question_6_option_3;
 
     //Declares and initializes the number of clicks of submit button to zero.
     int click = 0;
@@ -54,6 +59,8 @@ public class MainActivity extends AppCompatActivity{
         //initialize the views
 
         question_1 =findViewById(R.id.question_1);
+        question_1_option_3 =findViewById(R.id.question_1_option_3);
+        question_1_option_4 =findViewById(R.id.question_1_option_4);
 
         question_2_option_1 = findViewById(R.id.question_2_option_1);
         question_2_option_2 = findViewById(R.id.question_2_option_2);
@@ -62,8 +69,10 @@ public class MainActivity extends AppCompatActivity{
         question_2_option_5 = findViewById(R.id.question_2_option_5);
 
         myEditText_3 = findViewById(R.id.insert_answer_question_3);
+        question_3 = findViewById(R.id.correct_question_3);
 
         myEditText_4 = findViewById(R.id.insert_answer_question_4);
+        question_4 = findViewById(R.id.correct_question_4);
 
         question_5_option_1 = findViewById(R.id.question_5_option_1);
         question_5_option_2 = findViewById(R.id.question_5_option_2);
@@ -72,8 +81,8 @@ public class MainActivity extends AppCompatActivity{
         question_5_option_5 = findViewById(R.id.question_5_option_5);
 
         question_6 =findViewById(R.id.question_6);
-
-
+        question_6_option_2 = findViewById(R.id.question_6_option_2);
+        question_6_option_3=findViewById(R.id.question_6_option_3);
 
     }
 
@@ -87,14 +96,17 @@ public class MainActivity extends AppCompatActivity{
 
         int score = 0;
 
-        //correct answer for question 1.
+        //Every time submit button is clicked it adds 1 to click variable
+        click=click+1;
 
-        RadioButton question_1_option_4 = (RadioButton) findViewById(R.id.question_1_option_4);
+        //correct answer for question 1.
         boolean double_helix = question_1_option_4.isChecked();
 
-        //If selected the if statement will be executed and 1 will be added to the score
-        if (double_helix) {
+        //When selected for question 1, the if statement will be executed and 1 will be added to the score.
+        //On hitting submit button it will show that the answer is correct.
+        if (double_helix && click == 1) {
             score = score + 1;
+            question_1_option_3.append("           CORRECT!");
         }
 
         // boolean variables for question 2 where, whether a checkbox has been checked or not is stored.
@@ -109,8 +121,10 @@ public class MainActivity extends AppCompatActivity{
         boolean uracil = question_2_option_5.isChecked();
 
         //if this entire condition is true then the answer is correct for question 2 and 1 is added to the score
-        if (adenine && thymine && guanine && cytosine && !uracil) {
+        //On hitting submit button it will show that the answer is correct.
+        if (adenine && thymine && guanine && cytosine && !uracil && click == 1) {
             score = score + 1;
+            question_2_option_3.append("           CORRECT!");
         }
 
         //the text in answer field of question 3 is converted to a string and stored in the variable myEditTextValue_3.
@@ -119,8 +133,10 @@ public class MainActivity extends AppCompatActivity{
         String valueInUpperCase_3 = myEditTextValue_3.toUpperCase();
 
         // if the text contain "PCR" then the answer would be correct
-        if (valueInUpperCase_3.contains("PCR")) {
+        //On hitting submit button it will show that the answer is correct.
+        if (valueInUpperCase_3.contains("PCR") && click == 1) {
             score = score + 1;
+            question_3.setText("           CORRECT!");
         }
 
         //the text in answer field of question 4 is converted to a string and stored in the variable myEditTextValue_4.
@@ -129,8 +145,10 @@ public class MainActivity extends AppCompatActivity{
         String valueInUpperCase_4 = myEditTextValue_4.toUpperCase();
 
         // if the text contain "DNA" then the answer would be correct
-        if (valueInUpperCase_4.contains("DNA")) {
+        //On hitting submit button it will show that the answer is correct.
+        if (valueInUpperCase_4.contains("DNA") && click == 1) {
             score = score + 1;
+            question_4.setText("           CORRECT!");
         }
 
         // boolean variables for question 5 where, whether a checkbox has been checked or not is stored.
@@ -146,32 +164,31 @@ public class MainActivity extends AppCompatActivity{
 
         //if this entire condition is true then the answer is correct for question 5 and 1 is added to the score
 
-        if (phosphate && sugar && nitrogenous && !sulphur && !amino) {
+        if (phosphate && sugar && nitrogenous && !sulphur && !amino && click == 1) {
             score = score + 1;
+            question_5_option_3.append("           CORRECT!");
         }
 
         //correct answer for question 6.
-
-        RadioButton question_6_option_2 = (RadioButton) findViewById(R.id.question_6_option_2);
         boolean nucleus = question_6_option_2.isChecked();
 
         //If selected the if statement will be executed and 1 will be added to the score
+        //On hitting submit button it will show that the answer is correct.
 
-        if (nucleus) {
+        if (nucleus && click == 1) {
             score = score + 1;
+            question_6_option_3.append("           CORRECT!");
         }
 
-        //Every time submit button is clicked it adds 1 to click varaiable
-        click=click+1;
-
         //Displays the final results in toast message
+
         if (click == 1) {
             //Show the score message as a Toast
             Toast.makeText(MainActivity.this,
                     "Your score is " + score + " out of 6", Toast.LENGTH_LONG).show();
             }
         else{
-            //Show the score message as a Toast
+            //Show the alternate message as a Toast
             Toast.makeText(MainActivity.this,
                     "Click 'ATTEMPT AGAIN' to start the quiz again",
                     Toast.LENGTH_LONG).show();
@@ -186,6 +203,14 @@ public class MainActivity extends AppCompatActivity{
 
         //resets the number of clicks of submit button to zero.
         click =0;
+
+        //Replaces the string "Correct! with the initial values"
+        question_1_option_3.setText("Helix");
+        question_2_option_3.setText("Guanine");
+        question_3.setText("");
+        question_4.setText("");
+        question_5_option_3.setText("Nitrogenous base");
+        question_6_option_3.setText("mitochondria");
 
         //resets the radio buttons, check boxes and editText fields.
         question_1.clearCheck();
@@ -209,4 +234,5 @@ public class MainActivity extends AppCompatActivity{
         question_6.clearCheck();
 
     }
+
 }

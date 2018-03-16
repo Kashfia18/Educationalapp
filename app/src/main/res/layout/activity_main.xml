@@ -135,6 +135,7 @@
             android:textAppearance="@style/CodeForOptions"/>
 
         <TextView
+            android:id = "@+id/question_three"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/question_3"
@@ -143,17 +144,31 @@
             android:layout_marginBottom="@dimen/question_layout_marginBottom"
             android:textAppearance="@style/CodeForQuestions"/>
 
-        <EditText
-            android:id="@+id/insert_answer_question_3"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="left"
-            android:hint="@string/input_the_answer"
-            android:layout_marginLeft="@dimen/question_layout_marginLeft"
-            android:layout_marginRight="@dimen/question_layout_marginRight"
-            android:layout_marginBottom="@dimen/question_layout_marginBottom"
-            android:textAppearance="@style/CodeForOptions"
-            android:maxLength="@integer/quantity_length"/>
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/insert_answer_question_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/question_layout_marginBottom"
+                android:layout_marginLeft="@dimen/question_layout_marginLeft"
+                android:layout_marginRight="@dimen/question_layout_marginRight"
+                android:gravity="left"
+                android:hint="@string/input_the_answer"
+                android:maxLength="@integer/quantity_length"
+                android:textAppearance="@style/CodeForOptions" />
+
+            <TextView
+                android:id="@+id/correct_question_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/options_layout_marginLeft"
+                android:textAppearance="@style/CodeForOptions" />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -164,17 +179,31 @@
             android:layout_marginBottom="@dimen/question_layout_marginBottom"
             android:textAppearance="@style/CodeForQuestions"/>
 
-        <EditText
-            android:id="@+id/insert_answer_question_4"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/question_layout_marginLeft"
-            android:layout_marginRight="@dimen/question_layout_marginRight"
-            android:layout_marginBottom="@dimen/question_layout_marginBottom"
-            android:gravity="left"
-            android:hint="@string/input_the_answer"
-            android:textAppearance="@style/CodeForOptions"
-            android:maxLength="@integer/quantity_length"/>
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/insert_answer_question_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/question_layout_marginBottom"
+                android:layout_marginLeft="@dimen/question_layout_marginLeft"
+                android:layout_marginRight="@dimen/question_layout_marginRight"
+                android:gravity="left"
+                android:hint="@string/input_the_answer"
+                android:maxLength="@integer/quantity_length"
+                android:textAppearance="@style/CodeForOptions" />
+
+            <TextView
+                android:id="@+id/correct_question_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/options_layout_marginLeft"
+                android:textAppearance="@style/CodeForOptions" />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
