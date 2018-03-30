@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity{
         //On hitting submit button it will show that the answer is correct.
         if (double_helix && click == 1) {
             score = score + 1;
-            question_1_option_3.append("           CORRECT!");
+            question_1_option_3.append(getString(R.string.option_is_correct_add_two_space));
         }
 
         // boolean variables for question 2 where, whether a checkbox has been checked or not is stored.
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity{
         //On hitting submit button it will show that the answer is correct.
         if (adenine && thymine && guanine && cytosine && !uracil && click == 1) {
             score = score + 1;
-            question_2_option_3.append("           CORRECT!");
+            question_2_option_3.append(getString(R.string.option_is_correct));
         }
 
         //the text in answer field of question 3 is converted to a string and stored in the variable myEditTextValue_3.
@@ -134,9 +134,9 @@ public class MainActivity extends AppCompatActivity{
 
         // if the text contain "PCR" then the answer would be correct
         //On hitting submit button it will show that the answer is correct.
-        if (valueInUpperCase_3.contains("PCR") && click == 1) {
+        if (valueInUpperCase_3.contains(getString(R.string.answer_of_question3)) && click == 1) {
             score = score + 1;
-            question_3.setText("           CORRECT!");
+            question_3.setText(R.string.option_is_correct);
         }
 
         //the text in answer field of question 4 is converted to a string and stored in the variable myEditTextValue_4.
@@ -146,9 +146,9 @@ public class MainActivity extends AppCompatActivity{
 
         // if the text contain "DNA" then the answer would be correct
         //On hitting submit button it will show that the answer is correct.
-        if (valueInUpperCase_4.contains("DNA") && click == 1) {
+        if (valueInUpperCase_4.contains(getString(R.string.answer_of_question4)) && click == 1) {
             score = score + 1;
-            question_4.setText("           CORRECT!");
+            question_4.setText(R.string.option_is_correct);
         }
 
         // boolean variables for question 5 where, whether a checkbox has been checked or not is stored.
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity{
 
         if (phosphate && sugar && nitrogenous && !sulphur && !amino && click == 1) {
             score = score + 1;
-            question_5_option_3.append("           CORRECT!");
+            question_5_option_3.append(getString(R.string.option_is_correct));
         }
 
         //correct answer for question 6.
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity{
 
         if (nucleus && click == 1) {
             score = score + 1;
-            question_6_option_3.append("           CORRECT!");
+            question_6_option_3.append(getString(R.string.option_is_correct));
         }
 
         //Displays the final results in toast message
@@ -185,12 +185,12 @@ public class MainActivity extends AppCompatActivity{
         if (click == 1) {
             //Show the score message as a Toast
             Toast.makeText(MainActivity.this,
-                    "Your score is " + score + " out of 6", Toast.LENGTH_LONG).show();
+                    getString(R.string.your_score_is) + score + getString(R.string.out_of_6), Toast.LENGTH_LONG).show();
             }
         else{
             //Show the alternate message as a Toast
             Toast.makeText(MainActivity.this,
-                    "Click 'ATTEMPT AGAIN' to start the quiz again",
+                    R.string.click_attempt_again_to_start_the_quiz_again,
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -205,12 +205,12 @@ public class MainActivity extends AppCompatActivity{
         click =0;
 
         //Replaces the string "Correct! with the initial values"
-        question_1_option_3.setText("Helix");
-        question_2_option_3.setText("Guanine");
+        question_1_option_3.setText(R.string.helix);
+        question_2_option_3.setText(R.string.guanine);
         question_3.setText("");
         question_4.setText("");
-        question_5_option_3.setText("Nitrogenous base");
-        question_6_option_3.setText("mitochondria");
+        question_5_option_3.setText(R.string.base);
+        question_6_option_3.setText(R.string.mitochondria);
 
         //resets the radio buttons, check boxes and editText fields.
         question_1.clearCheck();

@@ -30,5 +30,16 @@
     <string name="question_6_option_5">cytoplasm</string>
     <string name="submit">Submit</string>
     <string name="Attempt_again">Attempt again</string>
+    <string name="helix">Helix</string>
+    <string name="mitochondria">mitochondria</string>
+    <string name="guanine">Guanine</string>
+    <string name="base">Nitrogenous base</string>
+    <string name="option_is_correct">\u0020\u0020\u0020\u0020\u0020\u0020CORRECT!</string>
+    <string name="option_is_correct_add_two_space">\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020CORRECT!</string>
+    <string name="answer_of_question3">PCR</string>
+    <string name="answer_of_question4">DNA</string>
+    <string name="your_score_is">Your score is\u0020</string>
+    <string name="out_of_6">\u0020out of 6</string>
+    <string name="click_attempt_again_to_start_the_quiz_again">Click \'ATTEMPT AGAIN\' to start the quiz again</string>
 
 </resources>
