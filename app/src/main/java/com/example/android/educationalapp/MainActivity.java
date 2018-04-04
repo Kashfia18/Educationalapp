@@ -1,6 +1,7 @@
 package com.example.android.educationalapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.support.v7.app.AppCompatActivity;
@@ -83,7 +84,18 @@ public class MainActivity extends AppCompatActivity{
         question_6 =findViewById(R.id.question_6);
         question_6_option_2 = findViewById(R.id.question_6_option_2);
         question_6_option_3=findViewById(R.id.question_6_option_3);
+    }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt("click", click);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        click = savedInstanceState.getInt("click");
     }
 
     /**

@@ -35,7 +35,7 @@
     <string name="guanine">Guanine</string>
     <string name="base">Nitrogenous base</string>
     <string name="option_is_correct">\u0020\u0020\u0020\u0020\u0020\u0020CORRECT!</string>
-    <string name="option_is_correct_add_two_space">\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020CORRECT!</string>
+    <string name="option_is_correct_add_two_space">\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020CORRECT!</string>
     <string name="answer_of_question3">PCR</string>
     <string name="answer_of_question4">DNA</string>
     <string name="your_score_is">Your score is\u0020</string>
