@@ -2,15 +2,18 @@ package com.example.android.educationalapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -23,31 +26,38 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity{
 
     //Declaring global variables
+
     RadioGroup question_1;
     RadioButton question_1_option_3;
     RadioButton question_1_option_4;
+    String question_1_option_3_string;
 
     CheckBox question_2_option_1;
     CheckBox question_2_option_2;
     CheckBox question_2_option_3;
     CheckBox question_2_option_4;
     CheckBox question_2_option_5;
+    String question_2_option_3_string;
 
     EditText myEditText_3;
     TextView question_3;
+    String question_3_string;
 
     EditText myEditText_4;
     TextView question_4;
+    String question_4_string;
 
     CheckBox question_5_option_1;
     CheckBox question_5_option_2;
     CheckBox question_5_option_3;
     CheckBox question_5_option_4;
     CheckBox question_5_option_5;
+    String question_5_option_3_string;
 
     RadioGroup question_6;
-    RadioButton question_6_option_2;
+//    RadioButton question_6_option_2;
     RadioButton question_6_option_3;
+    String question_6_option_3_string;
 
     //Declares and initializes the number of clicks of submit button to zero.
     int click = 0;
@@ -57,11 +67,14 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         //initialize the views
 
         question_1 =findViewById(R.id.question_1);
         question_1_option_3 =findViewById(R.id.question_1_option_3);
         question_1_option_4 =findViewById(R.id.question_1_option_4);
+
 
         question_2_option_1 = findViewById(R.id.question_2_option_1);
         question_2_option_2 = findViewById(R.id.question_2_option_2);
@@ -82,20 +95,58 @@ public class MainActivity extends AppCompatActivity{
         question_5_option_5 = findViewById(R.id.question_5_option_5);
 
         question_6 =findViewById(R.id.question_6);
-        question_6_option_2 = findViewById(R.id.question_6_option_2);
+//        question_6_option_2 = findViewById(R.id.question_6_option_2);
         question_6_option_3=findViewById(R.id.question_6_option_3);
+
+        //makes background image transparent.
+        View backgroundImage = findViewById(R.id.background);
+        Drawable background = backgroundImage.getBackground();
+        background.setAlpha(80);
+
     }
 
+    /**
+     * Saves data of activity before it is destroyed
+     */
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt("click", click);
         super.onSaveInstanceState(outState);
-    }
 
+        //extract text from the Views and store it in string
+        question_1_option_3_string= question_1_option_3.getText().toString();
+        question_2_option_3_string= question_2_option_3.getText().toString();
+        question_3_string = question_3.getText().toString();
+        question_4_string = question_4.getText().toString();
+        question_5_option_3_string= question_5_option_3.getText().toString();
+        question_6_option_3_string= question_6_option_3.getText().toString();
+
+        //save the user's current state
+        outState.putInt("click", click);
+        outState.putString("question_1_option_3_string",question_1_option_3_string);
+        outState.putString("question_2_option_3_string",question_2_option_3_string);
+        outState.putString("question_3_string",question_3_string);
+        outState.putString("question_4_string",question_4_string);
+        outState.putString("question_5_option_3_string",question_5_option_3_string);
+        outState.putString("question_6_option_3_string",question_6_option_3_string);
+
+        }
+
+        /**
+         * Restores data to the saved state when activity is recreated.
+         */
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+
+        // restores the values from their saved instances
         click = savedInstanceState.getInt("click");
+        question_1_option_3.setText(savedInstanceState.getString("question_1_option_3_string"));
+        question_2_option_3.setText(savedInstanceState.getString("question_2_option_3_string"));
+        question_3.setText(savedInstanceState.getString("question_3_string"));
+        question_4.setText(savedInstanceState.getString("question_4_string"));
+        question_5_option_3.setText(savedInstanceState.getString("question_5_option_3_string"));
+        question_6_option_3.setText(savedInstanceState.getString("question_6_option_3_string"));
+
     }
 
     /**
@@ -119,6 +170,7 @@ public class MainActivity extends AppCompatActivity{
         if (double_helix && click == 1) {
             score = score + 1;
             question_1_option_3.append(getString(R.string.option_is_correct_add_two_space));
+
         }
 
         // boolean variables for question 2 where, whether a checkbox has been checked or not is stored.
@@ -166,9 +218,9 @@ public class MainActivity extends AppCompatActivity{
         // boolean variables for question 5 where, whether a checkbox has been checked or not is stored.
         boolean phosphate = question_5_option_1.isChecked();
 
-        boolean sugar = question_5_option_2.isChecked();
+        boolean nitrogenous = question_5_option_2.isChecked();
 
-        boolean nitrogenous = question_5_option_3.isChecked();
+        boolean sugar = question_5_option_3.isChecked();
 
         boolean sulphur = question_5_option_4.isChecked();
 
@@ -182,7 +234,7 @@ public class MainActivity extends AppCompatActivity{
         }
 
         //correct answer for question 6.
-        boolean nucleus = question_6_option_2.isChecked();
+        boolean nucleus = question_6_option_3.isChecked();
 
         //If selected the if statement will be executed and 1 will be added to the score
         //On hitting submit button it will show that the answer is correct.
@@ -221,8 +273,8 @@ public class MainActivity extends AppCompatActivity{
         question_2_option_3.setText(R.string.guanine);
         question_3.setText("");
         question_4.setText("");
-        question_5_option_3.setText(R.string.base);
-        question_6_option_3.setText(R.string.mitochondria);
+        question_5_option_3.setText(R.string.sugar);
+        question_6_option_3.setText(R.string.nucleus);
 
         //resets the radio buttons, check boxes and editText fields.
         question_1.clearCheck();

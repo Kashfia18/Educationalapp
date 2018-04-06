@@ -8,6 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="radio_checkBoxStyle">
+        <item name="colorAccent">#1B5E20</item>
+        <item name="android:textColorSecondary">#000000</item>
+    </style>
+
+
     <style name="CodeForQuestions">
         <item name="android:textColor">@color/questionAnswerTextColor</item>
         <item name="android:fontFamily">vollkorn</item>
