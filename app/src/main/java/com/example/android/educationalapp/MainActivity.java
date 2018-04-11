@@ -2,6 +2,7 @@ package com.example.android.educationalapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.wifi.p2p.WifiP2pManager;
@@ -20,7 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * This app calculates and shows the results of a quiz.
+ * This app is a quiz app. When users answer and hit submit, it shows the score along with which answers are correct
+ * and which are incorrect. If a question is left unanswered it is taken as incorrect. If after hitting submit, the
+ * user updates a answer and hit submit, it will say "Attempt again" to try again and get a score.
  */
 
 public class MainActivity extends AppCompatActivity{
@@ -28,66 +31,71 @@ public class MainActivity extends AppCompatActivity{
     //Declaring global variables
 
     RadioGroup question_1;
-    RadioButton question_1_option_3;
     RadioButton question_1_option_4;
-    String question_1_option_3_string;
 
+
+    LinearLayout question_2;
     CheckBox question_2_option_1;
     CheckBox question_2_option_2;
     CheckBox question_2_option_3;
     CheckBox question_2_option_4;
     CheckBox question_2_option_5;
-    String question_2_option_3_string;
 
+    LinearLayout question_3;
     EditText myEditText_3;
-    TextView question_3;
-    String question_3_string;
 
+
+    LinearLayout question_4;
     EditText myEditText_4;
-    TextView question_4;
-    String question_4_string;
 
+    LinearLayout question_5;
     CheckBox question_5_option_1;
     CheckBox question_5_option_2;
     CheckBox question_5_option_3;
     CheckBox question_5_option_4;
     CheckBox question_5_option_5;
-    String question_5_option_3_string;
 
     RadioGroup question_6;
-//    RadioButton question_6_option_2;
     RadioButton question_6_option_3;
-    String question_6_option_3_string;
 
     //Declares and initializes the number of clicks of submit button to zero.
     int click = 0;
+
+    //declares integer variables for saving state (initial/correct/incorrect) of the questions.
+    int background_question_1;
+    int background_question_2;
+    int background_question_3;
+    int background_question_4;
+    int background_question_5;
+    int background_question_6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //hides the keyboard for edit textviews.
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //initialize the views
 
         question_1 =findViewById(R.id.question_1);
-        question_1_option_3 =findViewById(R.id.question_1_option_3);
         question_1_option_4 =findViewById(R.id.question_1_option_4);
 
-
+        question_2 = findViewById(R.id.question_2);
         question_2_option_1 = findViewById(R.id.question_2_option_1);
         question_2_option_2 = findViewById(R.id.question_2_option_2);
         question_2_option_3 = findViewById(R.id.question_2_option_3);
         question_2_option_4 = findViewById(R.id.question_2_option_4);
         question_2_option_5 = findViewById(R.id.question_2_option_5);
 
+        question_3 = findViewById(R.id.question_3);
         myEditText_3 = findViewById(R.id.insert_answer_question_3);
-        question_3 = findViewById(R.id.correct_question_3);
 
+        question_4 = findViewById(R.id.question_4);
         myEditText_4 = findViewById(R.id.insert_answer_question_4);
-        question_4 = findViewById(R.id.correct_question_4);
 
+        question_5 = findViewById(R.id.question_5);
         question_5_option_1 = findViewById(R.id.question_5_option_1);
         question_5_option_2 = findViewById(R.id.question_5_option_2);
         question_5_option_3 = findViewById(R.id.question_5_option_3);
@@ -95,7 +103,6 @@ public class MainActivity extends AppCompatActivity{
         question_5_option_5 = findViewById(R.id.question_5_option_5);
 
         question_6 =findViewById(R.id.question_6);
-//        question_6_option_2 = findViewById(R.id.question_6_option_2);
         question_6_option_3=findViewById(R.id.question_6_option_3);
 
         //makes background image transparent.
@@ -112,23 +119,14 @@ public class MainActivity extends AppCompatActivity{
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        //extract text from the Views and store it in string
-        question_1_option_3_string= question_1_option_3.getText().toString();
-        question_2_option_3_string= question_2_option_3.getText().toString();
-        question_3_string = question_3.getText().toString();
-        question_4_string = question_4.getText().toString();
-        question_5_option_3_string= question_5_option_3.getText().toString();
-        question_6_option_3_string= question_6_option_3.getText().toString();
-
         //save the user's current state
         outState.putInt("click", click);
-        outState.putString("question_1_option_3_string",question_1_option_3_string);
-        outState.putString("question_2_option_3_string",question_2_option_3_string);
-        outState.putString("question_3_string",question_3_string);
-        outState.putString("question_4_string",question_4_string);
-        outState.putString("question_5_option_3_string",question_5_option_3_string);
-        outState.putString("question_6_option_3_string",question_6_option_3_string);
-
+        outState.putInt("background_question_1",background_question_1);
+        outState.putInt("background_question_2",background_question_2);
+        outState.putInt("background_question_3",background_question_3);
+        outState.putInt("background_question_4",background_question_4);
+        outState.putInt("background_question_5",background_question_5);
+        outState.putInt("background_question_6",background_question_6);
         }
 
         /**
@@ -140,13 +138,61 @@ public class MainActivity extends AppCompatActivity{
 
         // restores the values from their saved instances
         click = savedInstanceState.getInt("click");
-        question_1_option_3.setText(savedInstanceState.getString("question_1_option_3_string"));
-        question_2_option_3.setText(savedInstanceState.getString("question_2_option_3_string"));
-        question_3.setText(savedInstanceState.getString("question_3_string"));
-        question_4.setText(savedInstanceState.getString("question_4_string"));
-        question_5_option_3.setText(savedInstanceState.getString("question_5_option_3_string"));
-        question_6_option_3.setText(savedInstanceState.getString("question_6_option_3_string"));
 
+        //restoring background color
+        background_question_1= savedInstanceState.getInt("background_question_1");
+        if (background_question_1 == 9) { //if answer correct
+            question_1.setBackgroundResource(R.drawable.box_green_layout);
+        } else if (background_question_1 == 10){ // if answer is incorrect or unanswered
+            question_1.setBackgroundResource(R.drawable.box_red_layout);
+        } else if(background_question_1 == 8){ // initial blue background.
+            question_1.setBackgroundResource(R.drawable.box_layout);
+        }
+
+        background_question_2= savedInstanceState.getInt("background_question_2");
+        if (background_question_2 == 9) {
+            question_2.setBackgroundResource(R.drawable.box_green_layout);
+        } else if (background_question_2 == 10){
+            question_2.setBackgroundResource(R.drawable.box_red_layout);
+        } else if(background_question_2 == 8){
+            question_2.setBackgroundResource(R.drawable.box_layout);
+        }
+
+        background_question_3= savedInstanceState.getInt("background_question_3");
+        if (background_question_3 == 9) {
+            question_3.setBackgroundResource(R.drawable.box_green_layout);
+        } else if (background_question_3 == 10){
+            question_3.setBackgroundResource(R.drawable.box_red_layout);
+        } else if(background_question_3 == 8){
+            question_3.setBackgroundResource(R.drawable.box_layout);
+        }
+
+        background_question_4= savedInstanceState.getInt("background_question_4");
+        if (background_question_4 == 9) {
+            question_4.setBackgroundResource(R.drawable.box_green_layout);
+        } else if (background_question_4 == 10){
+            question_4.setBackgroundResource(R.drawable.box_red_layout);
+        } else if(background_question_4 == 8){
+            question_4.setBackgroundResource(R.drawable.box_layout);
+        }
+
+        background_question_5= savedInstanceState.getInt("background_question_5");
+        if (background_question_5 == 9) {
+            question_5.setBackgroundResource(R.drawable.box_green_layout);
+        }else if (background_question_5 == 10){
+            question_5.setBackgroundResource(R.drawable.box_red_layout);
+        } else if(background_question_5 == 8){
+            question_5.setBackgroundResource(R.drawable.box_layout);
+        }
+
+        background_question_6= savedInstanceState.getInt("background_question_6");
+        if (background_question_6 == 9) {
+            question_6.setBackgroundResource(R.drawable.box_green_layout);
+        } else if (background_question_6 == 10){
+            question_6.setBackgroundResource(R.drawable.box_red_layout);
+        } else if(background_question_6 == 8){
+            question_6.setBackgroundResource(R.drawable.box_layout);
+        }
     }
 
     /**
@@ -160,7 +206,7 @@ public class MainActivity extends AppCompatActivity{
         int score = 0;
 
         //Every time submit button is clicked it adds 1 to click variable
-        click=click+1;
+        click = click + 1;
 
         //correct answer for question 1.
         boolean double_helix = question_1_option_4.isChecked();
@@ -169,8 +215,19 @@ public class MainActivity extends AppCompatActivity{
         //On hitting submit button it will show that the answer is correct.
         if (double_helix && click == 1) {
             score = score + 1;
-            question_1_option_3.append(getString(R.string.option_is_correct_add_two_space));
-
+            //turns the background green if the answer is correct
+            question_1.setBackgroundResource(R.drawable.box_green_layout);
+            //saves the correct state of the question as green background
+            background_question_1 = 9;
+        } else if (double_helix && click >= 1) {
+            // even if the user keeps hitting the submit button multiple times it will still be green
+            question_1.setBackgroundResource(R.drawable.box_green_layout);
+            background_question_1 = 9;
+        } else {
+            // if the question is answered incorrectly or left unanswered the background turns red.
+            question_1.setBackgroundResource(R.drawable.box_red_layout);
+            //saves the incorrect state of the question as red background
+            background_question_1 = 10;
         }
 
         // boolean variables for question 2 where, whether a checkbox has been checked or not is stored.
@@ -188,7 +245,14 @@ public class MainActivity extends AppCompatActivity{
         //On hitting submit button it will show that the answer is correct.
         if (adenine && thymine && guanine && cytosine && !uracil && click == 1) {
             score = score + 1;
-            question_2_option_3.append(getString(R.string.option_is_correct));
+            question_2.setBackgroundResource(R.drawable.box_green_layout);
+            background_question_2 = 9;
+        } else if (adenine && thymine && guanine && cytosine && !uracil && click >= 1) {
+            question_2.setBackgroundResource(R.drawable.box_green_layout);
+            background_question_2 = 9;
+        } else {
+            question_2.setBackgroundResource(R.drawable.box_red_layout);
+            background_question_2 = 10;
         }
 
         //the text in answer field of question 3 is converted to a string and stored in the variable myEditTextValue_3.
@@ -200,7 +264,14 @@ public class MainActivity extends AppCompatActivity{
         //On hitting submit button it will show that the answer is correct.
         if (valueInUpperCase_3.contains(getString(R.string.answer_of_question3)) && click == 1) {
             score = score + 1;
-            question_3.setText(R.string.option_is_correct);
+            question_3.setBackgroundResource(R.drawable.box_green_layout);
+            background_question_3 = 9;
+        } else if (valueInUpperCase_3.contains(getString(R.string.answer_of_question3)) && click >= 1){
+            question_3.setBackgroundResource(R.drawable.box_green_layout);
+            background_question_3 = 9;
+        }else{
+            question_3.setBackgroundResource(R.drawable.box_red_layout);
+            background_question_3 = 10;
         }
 
         //the text in answer field of question 4 is converted to a string and stored in the variable myEditTextValue_4.
@@ -212,7 +283,14 @@ public class MainActivity extends AppCompatActivity{
         //On hitting submit button it will show that the answer is correct.
         if (valueInUpperCase_4.contains(getString(R.string.answer_of_question4)) && click == 1) {
             score = score + 1;
-            question_4.setText(R.string.option_is_correct);
+            question_4.setBackgroundResource(R.drawable.box_green_layout);
+            background_question_4 = 9;
+        }else if (valueInUpperCase_4.contains(getString(R.string.answer_of_question4)) && click >= 1){
+            question_4.setBackgroundResource(R.drawable.box_green_layout);
+            background_question_4 = 9;
+        }else{
+            question_4.setBackgroundResource(R.drawable.box_red_layout);
+            background_question_4 = 10;
         }
 
         // boolean variables for question 5 where, whether a checkbox has been checked or not is stored.
@@ -230,7 +308,14 @@ public class MainActivity extends AppCompatActivity{
 
         if (phosphate && sugar && nitrogenous && !sulphur && !amino && click == 1) {
             score = score + 1;
-            question_5_option_3.append(getString(R.string.option_is_correct));
+            question_5.setBackgroundResource(R.drawable.box_green_layout);
+            background_question_5 = 9;
+        }else if(phosphate && sugar && nitrogenous && !sulphur && !amino && click >= 1) {
+            question_5.setBackgroundResource(R.drawable.box_green_layout);
+            background_question_5 = 9;
+        }else{
+            question_5.setBackgroundResource(R.drawable.box_red_layout);
+            background_question_5 = 10;
         }
 
         //correct answer for question 6.
@@ -241,7 +326,14 @@ public class MainActivity extends AppCompatActivity{
 
         if (nucleus && click == 1) {
             score = score + 1;
-            question_6_option_3.append(getString(R.string.option_is_correct));
+            question_6.setBackgroundResource(R.drawable.box_green_layout);
+            background_question_6 = 9;
+        }else if(nucleus && click >= 1){
+            question_6.setBackgroundResource(R.drawable.box_green_layout);
+            background_question_6 = 9;
+        }else{
+            question_6.setBackgroundResource(R.drawable.box_red_layout);
+            background_question_6 = 10;
         }
 
         //Displays the final results in toast message
@@ -259,7 +351,6 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-
         /**
      * This method is called when the attempt_again button is clicked. It resets everything.
      */
@@ -268,13 +359,22 @@ public class MainActivity extends AppCompatActivity{
         //resets the number of clicks of submit button to zero.
         click =0;
 
-        //Replaces the string "Correct! with the initial values"
-        question_1_option_3.setText(R.string.helix);
-        question_2_option_3.setText(R.string.guanine);
-        question_3.setText("");
-        question_4.setText("");
-        question_5_option_3.setText(R.string.sugar);
-        question_6_option_3.setText(R.string.nucleus);
+        //resets the background of the questions to the inital blue state.
+        question_1.setBackgroundResource(R.drawable.box_layout);
+        //saves the initial state of the question as blue background in an integer.
+        background_question_1 = 8;
+
+
+        question_2.setBackgroundResource(R.drawable.box_layout);
+        background_question_2 = 8;
+        question_3.setBackgroundResource(R.drawable.box_layout);
+        background_question_3 = 8;
+        question_4.setBackgroundResource(R.drawable.box_layout);
+        background_question_4 = 8;
+        question_5.setBackgroundResource(R.drawable.box_layout);
+        background_question_5 = 8;
+        question_6.setBackgroundResource(R.drawable.box_layout);
+        background_question_6 = 8;
 
         //resets the radio buttons, check boxes and editText fields.
         question_1.clearCheck();

@@ -76,6 +76,7 @@
         </RadioGroup>
 
         <LinearLayout
+            android:id="@+id/question_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_around_boxes"
@@ -138,6 +139,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/question_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_around_boxes"
@@ -178,6 +180,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/question_4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_around_boxes"
@@ -218,6 +221,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/question_5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_around_boxes"
