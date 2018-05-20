@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     /**
-     * This method is called when the submit button is clicked.
+     * This method is called to calculate the score when the submit button is clicked.
      */
     private int calculate() {
         score= score+1;
