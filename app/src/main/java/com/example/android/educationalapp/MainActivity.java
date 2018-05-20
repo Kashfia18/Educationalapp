@@ -17,7 +17,7 @@ import android.widget.Toast;
 /**
  * This app is a quiz app. When users answer and hit submit, it shows the score along with which answers are correct
  * and which are incorrect. If a question is left unanswered it is taken as incorrect. If after hitting submit, the
- * user updates a answer and hit submit, it will say "Attempt again" to try again and get a score.
+ * user updates a answer and hit submit, it will say "Attempt again" to try the entire quiz again and get a score.
  */
 
 public class MainActivity extends AppCompatActivity{
@@ -190,7 +190,6 @@ public class MainActivity extends AppCompatActivity{
     public void submit(View view) {
 
         //Initial score is 0.
-
         int score = 0;
 
         //Every time submit button is clicked it adds 1 to click variable
@@ -211,13 +210,9 @@ public class MainActivity extends AppCompatActivity{
 
         // boolean variables for question 2 where, whether a checkbox has been checked or not is stored.
         boolean adenine = question_2_option_1.isChecked();
-
         boolean thymine = question_2_option_2.isChecked();
-
         boolean guanine = question_2_option_3.isChecked();
-
         boolean cytosine = question_2_option_4.isChecked();
-
         boolean uracil = question_2_option_5.isChecked();
 
         //if this entire condition is true then the answer is correct for question 2 and 1 is added to the score
@@ -240,6 +235,7 @@ public class MainActivity extends AppCompatActivity{
             question_3.setBackgroundResource(R.drawable.box_green_layout);
             background_question_3 = 9;
         }
+
         //the text in answer field of question 4 is converted to a string and stored in the variable myEditTextValue_4.
         // All the text is converted to uppercase to compare with the correct answer
         String myEditTextValue_4 = myEditText_4.getText().toString();
@@ -255,17 +251,12 @@ public class MainActivity extends AppCompatActivity{
 
         // boolean variables for question 5 where, whether a checkbox has been checked or not is stored.
         boolean phosphate = question_5_option_1.isChecked();
-
         boolean nitrogenous = question_5_option_2.isChecked();
-
         boolean sugar = question_5_option_3.isChecked();
-
         boolean sulphur = question_5_option_4.isChecked();
-
         boolean amino = question_5_option_5.isChecked();
 
         //if this entire condition is true then the answer is correct for question 5 and 1 is added to the score
-
         if (phosphate && sugar && nitrogenous && !sulphur && !amino && click == 1) {
             score = score + 1;
             question_5.setBackgroundResource(R.drawable.box_green_layout);
@@ -277,7 +268,6 @@ public class MainActivity extends AppCompatActivity{
 
         //If selected the if statement will be executed and 1 will be added to the score
         //On hitting submit button it will show that the answer is correct.
-
         if (nucleus && click == 1) {
             score = score + 1;
             question_6.setBackgroundResource(R.drawable.box_green_layout);
@@ -285,7 +275,6 @@ public class MainActivity extends AppCompatActivity{
         }
 
         //Displays the final results in toast message
-
         if (click == 1) {
             //Show the score message as a Toast
             Toast.makeText(MainActivity.this,
