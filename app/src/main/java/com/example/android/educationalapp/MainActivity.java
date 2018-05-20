@@ -24,58 +24,60 @@ public class MainActivity extends AppCompatActivity{
 
     //Declaring global variables
 
-    RadioGroup question_1;
-    RadioButton question_1_option_4;
+    private RadioGroup question_1;
+    private RadioButton question_1_option_4;
 
 
-    LinearLayout question_2;
-    CheckBox question_2_option_1;
-    CheckBox question_2_option_2;
-    CheckBox question_2_option_3;
-    CheckBox question_2_option_4;
-    CheckBox question_2_option_5;
+    private LinearLayout question_2;
+    private CheckBox question_2_option_1;
+    private CheckBox question_2_option_2;
+    private CheckBox question_2_option_3;
+    private CheckBox question_2_option_4;
+    private CheckBox question_2_option_5;
 
-    LinearLayout question_3;
-    EditText myEditText_3;
+    private LinearLayout question_3;
+    private EditText myEditText_3;
 
 
-    LinearLayout question_4;
-    EditText myEditText_4;
+    private LinearLayout question_4;
+    private EditText myEditText_4;
 
-    LinearLayout question_5;
-    CheckBox question_5_option_1;
-    CheckBox question_5_option_2;
-    CheckBox question_5_option_3;
-    CheckBox question_5_option_4;
-    CheckBox question_5_option_5;
+    private LinearLayout question_5;
+    private CheckBox question_5_option_1;
+    private CheckBox question_5_option_2;
+    private CheckBox question_5_option_3;
+    private CheckBox question_5_option_4;
+    private CheckBox question_5_option_5;
 
-    RadioGroup question_6;
-    RadioButton question_6_option_3;
+    private RadioGroup question_6;
+    private RadioButton question_6_option_3;
+
+    //Declare and initialize the score of quiz to zero;
+    private int score=0;
 
     //Declares and initializes the number of clicks of submit button to zero.
-    int click = 0;
+    private int click = 0;
 
     //declares integer variables for saving state (initial/correct/incorrect) of the questions.
-    int background_question_1;
-    int background_question_2;
-    int background_question_3;
-    int background_question_4;
-    int background_question_5;
-    int background_question_6;
+    private int background_question_1;
+    private int background_question_2;
+    private int background_question_3;
+    private int background_question_4;
+    private int background_question_5;
+    private int background_question_6;
 
     // ScrollView mScrollView;
-    ScrollView mScrollView;
+    private ScrollView mScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //hides the keyboard for edit textviews.
+        //hides the keyboard for edit TextViews.
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        //initialize the views
-
+        //initialize the views.
         question_1 =findViewById(R.id.question_1);
         question_1_option_4 =findViewById(R.id.question_1_option_4);
 
@@ -186,22 +188,27 @@ public class MainActivity extends AppCompatActivity{
     /**
      * This method is called when the submit button is clicked.
      */
+    private int calculate() {
+        score= score+1;
+        return score;
+    }
+
+    /**
+     * This method is called when the submit button is clicked.
+     */
 
     public void submit(View view) {
-
-        //Initial score is 0.
-        int score = 0;
 
         //Every time submit button is clicked it adds 1 to click variable
         click = click + 1;
 
         //correct answer for question 1.
-        boolean double_helix = question_1_option_4.isChecked();
+        boolean  double_helix= question_1_option_4.isChecked();
 
         //When selected for question 1, the if statement will be executed and 1 will be added to the score.
         //On hitting submit button it will show that the answer is correct.
         if (double_helix && click == 1) {
-            score = score + 1;
+            score = calculate();
             //turns the background green if the answer is correct
             question_1.setBackgroundResource(R.drawable.box_green_layout);
             //saves the correct state of the question as green background
@@ -218,7 +225,7 @@ public class MainActivity extends AppCompatActivity{
         //if this entire condition is true then the answer is correct for question 2 and 1 is added to the score
         //On hitting submit button it will show that the answer is correct.
         if (adenine && thymine && guanine && cytosine && !uracil && click == 1) {
-            score = score + 1;
+            score = calculate();
             question_2.setBackgroundResource(R.drawable.box_green_layout);
             background_question_2 = 9;
         }
@@ -231,7 +238,7 @@ public class MainActivity extends AppCompatActivity{
         // if the text contain "PCR" then the answer would be correct
         //On hitting submit button it will show that the answer is correct.
         if (valueInUpperCase_3.contains(getString(R.string.answer_of_question3)) && click == 1) {
-            score = score + 1;
+            score = calculate();
             question_3.setBackgroundResource(R.drawable.box_green_layout);
             background_question_3 = 9;
         }
@@ -244,7 +251,7 @@ public class MainActivity extends AppCompatActivity{
         // if the text contain "DNA" then the answer would be correct
         //On hitting submit button it will show that the answer is correct.
         if (valueInUpperCase_4.contains(getString(R.string.answer_of_question4)) && click == 1) {
-            score = score + 1;
+            score = calculate();
             question_4.setBackgroundResource(R.drawable.box_green_layout);
             background_question_4 = 9;
         }
@@ -258,7 +265,7 @@ public class MainActivity extends AppCompatActivity{
 
         //if this entire condition is true then the answer is correct for question 5 and 1 is added to the score
         if (phosphate && sugar && nitrogenous && !sulphur && !amino && click == 1) {
-            score = score + 1;
+            score = calculate();
             question_5.setBackgroundResource(R.drawable.box_green_layout);
             background_question_5 = 9;
         }
@@ -269,7 +276,7 @@ public class MainActivity extends AppCompatActivity{
         //If selected the if statement will be executed and 1 will be added to the score
         //On hitting submit button it will show that the answer is correct.
         if (nucleus && click == 1) {
-            score = score + 1;
+            score = calculate();
             question_6.setBackgroundResource(R.drawable.box_green_layout);
             background_question_6 = 9;
         }
@@ -279,16 +286,17 @@ public class MainActivity extends AppCompatActivity{
             //Show the score message as a Toast
             Toast.makeText(MainActivity.this,
                     getString(R.string.your_score_is) + score + getString(R.string.out_of_6), Toast.LENGTH_LONG).show();
-            }
+        }
         else{
             //Show the alternate message as a Toast
             Toast.makeText(MainActivity.this,
                     R.string.click_attempt_again_to_start_the_quiz_again,
                     Toast.LENGTH_LONG).show();
         }
+
     }
 
-        /**
+    /**
      * This method is called when the attempt_again button is clicked. It resets everything.
      */
     public void attempt_again(View view){
@@ -296,7 +304,10 @@ public class MainActivity extends AppCompatActivity{
         //resets the number of clicks of submit button to zero.
         click =0;
 
-        //resets the background of the questions to the inital blue state.
+        //resets the score to zero.
+        score = 0;
+
+        //resets the background of the questions to the initial blue state.
         question_1.setBackgroundResource(R.drawable.box_layout);
 
         //saves the initial state of the question as blue background in an integer.
